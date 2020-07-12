@@ -3,13 +3,11 @@ package space.linuxct.architv;
 import android.app.Activity;
 import android.os.Bundle;
 import android.os.PowerManager;
-import android.view.MotionEvent;
-import android.view.View;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
-public class MainActivity extends Activity {
+public class PhoneActivity extends Activity {
     private WebView mWebView;
     private String upstreamURL = BuildConfig.SERVER_URL;
     private PowerManager.WakeLock wakeLock;
@@ -23,20 +21,13 @@ public class MainActivity extends Activity {
 
         mWebView.setWebViewClient(new WebViewClient(){});
 
-        mWebView.setOnTouchListener(null);
-        mWebView.setEnabled(false);
-
         PowerManager powerManager = (PowerManager) getSystemService(POWER_SERVICE);
         wakeLock = powerManager.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, "ArchiTV:wakelock");
 
         WebSettings webSettings = mWebView.getSettings();
         webSettings.setMediaPlaybackRequiresUserGesture(false);
-        webSettings.setNeedInitialFocus(false);
-
         webSettings.setJavaScriptEnabled(true);
         mWebView.loadUrl(upstreamURL);
-
-
     }
 
     @Override

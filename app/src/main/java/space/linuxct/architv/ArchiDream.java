@@ -7,7 +7,7 @@ import android.webkit.WebViewClient;
 
 public class ArchiDream extends DreamService {
     private WebView backgroundView;
-    private String upstreamURL = "https://archillect.com/tv";
+    private String upstreamURL = BuildConfig.SERVER_URL;
 
     @Override
     public void onDreamingStarted() {

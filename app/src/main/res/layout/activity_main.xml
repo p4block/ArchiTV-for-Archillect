@@ -16,7 +16,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:clickable="false"
-        android:id="@+id/backgroundview">
+        android:id="@+id/backgroundview"
+        android:focusable="false">
     </WebView>
-
 </RelativeLayout>
