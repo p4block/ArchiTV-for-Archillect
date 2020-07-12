@@ -1,16 +1,13 @@
 package space.linuxct.architv;
 
 import android.service.dreams.DreamService;
+import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
 public class ArchillectDream extends DreamService {
-
-    public WebView backgroundView;
-
-    String url;
-
-    Runnable runnable;
+    private WebView backgroundView;
+    private String upstreamURL = "https://archillect.com/tv";
 
     @Override
     public void onDreamingStarted() {
@@ -19,24 +16,16 @@ public class ArchillectDream extends DreamService {
 
         backgroundView = findViewById(R.id.backgroundview);
 
-        backgroundView.setWebViewClient(new WebViewClient(){
-            public boolean shouldOverrideUrlLoading(WebView view, String url) {
-                return true;
-            }
-        });
+        backgroundView.setWebViewClient(new WebViewClient(){});
 
-        url = "https://archillect.com/tv";
-        backgroundView.loadUrl(url);
-
-        runnable = new Runnable() {
-            @Override
-            public void run() {
-                backgroundView.postDelayed(this, 7000);
-                backgroundView.loadUrl(url);
-            }
-        };
-
-        backgroundView.postDelayed(runnable,7000);
+        WebSettings webSettings = backgroundView.getSettings();
+        webSettings.setJavaScriptEnabled(false);
+        backgroundView.loadUrl(upstreamURL);
     }
 
+    @Override
+    public void onDreamingStopped(){
+        backgroundView.destroy();
+        backgroundView = null;
+    }
 }

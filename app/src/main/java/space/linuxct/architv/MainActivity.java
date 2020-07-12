@@ -8,7 +8,6 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
 public class MainActivity extends Activity {
-
     private WebView mWebView;
     private String upstreamURL = "https://archillect.com/tv";
     private PowerManager.WakeLock wakeLock;
@@ -24,6 +23,11 @@ public class MainActivity extends Activity {
 
         PowerManager powerManager = (PowerManager) getSystemService(POWER_SERVICE);
         wakeLock = powerManager.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, "ArchiTV:wakelock");
+
+        WebSettings webSettings = mWebView.getSettings();
+        webSettings.setMediaPlaybackRequiresUserGesture(false);
+        webSettings.setJavaScriptEnabled(true);
+        mWebView.loadUrl(upstreamURL);
     }
 
     @Override
@@ -33,21 +37,8 @@ public class MainActivity extends Activity {
                 wakeLock.acquire();
             }
         }
-
-        WebSettings webSettings = mWebView.getSettings();
-        webSettings.setJavaScriptEnabled(true);
-        mWebView.loadUrl(upstreamURL);
-
-        // After 7s press F5 to work around [ENABLE]
-        Runnable runnable = new Runnable() {
-            @Override
-            public void run() {
-                mWebView.reload();
-            }
-        };
-
-        mWebView.postDelayed(runnable,7000);
-
+        mWebView.resumeTimers();
+        mWebView.onResume();
         super.onResume();
     }
 
@@ -58,9 +49,10 @@ public class MainActivity extends Activity {
                 wakeLock.release();
             }
         }
+        mWebView.onPause();
+        mWebView.pauseTimers();
         super.onPause();
     }
-
 
     @Override
     protected void onDestroy(){
@@ -69,8 +61,8 @@ public class MainActivity extends Activity {
                 wakeLock.release();
             }
         }
+        mWebView.destroy();
+        mWebView = null;
         super.onDestroy();
     }
-
-
 }
