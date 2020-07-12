@@ -1,6 +1,4 @@
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="space.linuxct.architv">
-
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="space.linuxct.architv">
     <uses-permission android:name="android.permission.WAKE_LOCK"/>
     <uses-permission android:name="android.permission.INTERNET"/>
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
@@ -18,7 +16,8 @@
     <application
         android:keepScreenOn="true"
         android:allowBackup="true"
-        android:icon="@mipmap/archillect_icon_512"
+        android:icon="@mipmap/ic_launcher"
+        android:roundIcon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:largeHeap="true"
@@ -37,7 +36,7 @@
         <activity
             android:name="space.linuxct.architv.MainActivity"
             android:banner="@drawable/architv_banner"
-            android:icon="@drawable/architv_banner"
+            android:icon="@mipmap/ic_launcher"
             android:label="@string/app_name"
             android:logo="@drawable/architv_banner"
             android:screenOrientation="landscape"
@@ -47,14 +46,12 @@
                 <category android:name="android.intent.category.LEANBACK_LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
             android:name="space.linuxct.architv.PhoneActivity"
-            android:banner="@drawable/architv_banner"
-            android:icon="@drawable/architv_banner"
+            android:icon="@mipmap/ic_launcher"
+            android:roundIcon="@mipmap/ic_launcher"
             android:label="@string/app_name"
-            android:logo="@drawable/architv_banner"
-            android:screenOrientation="landscape"
+            android:screenOrientation="sensor"
             android:theme="@android:style/Theme.NoTitleBar.Fullscreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
