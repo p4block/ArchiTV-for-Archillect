@@ -1,27 +1,21 @@
 package com.vivi.viviarchillecttv;
 
 import android.app.Activity;
-import android.content.Context;
 import android.os.Bundle;
 import android.os.PowerManager;
+import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
-import com.google.android.gms.analytics.HitBuilders;
-import com.google.android.gms.analytics.Tracker;
 
 public class MainActivity extends Activity {
-
-    private Tracker mTracker;
-    public ArchillectApplication application;
 
     public WebView backgroundView;
 
     String url;
 
-    Context context;
-    Runnable runnable;
+    private Runnable mRunnable;
 
-    public static boolean Donezo = false;
+    public static boolean donette = false;
 
     PowerManager.WakeLock wakeLock;
 
@@ -31,53 +25,31 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        // Obtain the shared Tracker instance.
-        application = (ArchillectApplication) getApplication();
+        backgroundView = findViewById(R.id.backgroundview);
 
-        mTracker = application.getDefaultTracker();
-        mTracker.enableExceptionReporting(true);
-        mTracker.enableAutoActivityTracking(true);
-        mTracker.setScreenName("Main Screen");
-
-        backgroundView = (WebView) findViewById(R.id.backgroundview);
-
-        backgroundView.setWebViewClient(new WebViewClient(){
-            public boolean shouldOverrideUrlLoading(WebView view, String url) {
-                return true;
-            }
-        });
-
-        context = this;
+        backgroundView.setWebViewClient(new WebViewClient(){});
 
         PowerManager powerManager = (PowerManager) getSystemService(POWER_SERVICE);
-        wakeLock = powerManager.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK,
-                "MyWakelockTag");
+        wakeLock = powerManager.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, "Archillect:wakelock");
         wakeLock.acquire();
 
-        Thread.setDefaultUncaughtExceptionHandler (new Thread.UncaughtExceptionHandler()
-        {
-            @Override
-            public void uncaughtException (Thread thread, Throwable e)
-            {
-                if(wakeLock.isHeld()){
-                    wakeLock.release();
-                }
-            }
-        });
-
-        url = "http://archillect.com/tv";
+        url = "https://archillect.com/tv";
         backgroundView.loadUrl(url);
 
-        runnable = new Runnable() {
+        mRunnable = new Runnable() {
             @Override
             public void run() {
-                if (!Donezo) {
+                if (!donette) {
+                    donette = true;
                     backgroundView.postDelayed(this, 7000);
+                    WebSettings webSettings = backgroundView.getSettings();
+                    webSettings.setJavaScriptEnabled(true);
                     backgroundView.loadUrl(url);
+
                 }
             }
         };
-        backgroundView.postDelayed(runnable,7000);
+        backgroundView.postDelayed(mRunnable,7000);
     }
 
 
@@ -93,7 +65,6 @@ public class MainActivity extends Activity {
 
     @Override
     public void onPause() {
-        requestVisibleBehind(true);
         if(wakeLock != null){
             if(wakeLock.isHeld()){
                 wakeLock.release();
@@ -102,15 +73,6 @@ public class MainActivity extends Activity {
         super.onPause();
     }
 
-    @Override
-    public void onVisibleBehindCanceled() {
-        if(wakeLock != null){
-            if(wakeLock.isHeld()){
-                wakeLock.release();
-            }
-        }
-        super.onVisibleBehindCanceled();
-    }
 
     @Override
     protected void onDestroy(){
@@ -119,12 +81,6 @@ public class MainActivity extends Activity {
                 wakeLock.release();
             }
         }
-        mTracker.setScreenName("ExitScreen");
-        mTracker.send(new HitBuilders.EventBuilder()
-                .setCategory("UX")
-                .setAction("Click")
-                .setLabel("Exit")
-                .build());
         super.onDestroy();
     }
 

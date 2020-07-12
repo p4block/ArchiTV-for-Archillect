@@ -6,8 +6,6 @@ import android.webkit.WebViewClient;
 
 public class ArchillectDream extends DreamService {
 
-    public ArchillectApplication application;
-
     public WebView backgroundView;
 
     String url;
@@ -19,7 +17,7 @@ public class ArchillectDream extends DreamService {
         super.onDreamingStarted();
         setContentView(R.layout.activity_main);
 
-        backgroundView = (WebView) findViewById(R.id.backgroundview);
+        backgroundView = findViewById(R.id.backgroundview);
 
         backgroundView.setWebViewClient(new WebViewClient(){
             public boolean shouldOverrideUrlLoading(WebView view, String url) {
@@ -27,7 +25,7 @@ public class ArchillectDream extends DreamService {
             }
         });
 
-        url = "http://archillect.com/tv";
+        url = "https://archillect.com/tv";
         backgroundView.loadUrl(url);
 
         runnable = new Runnable() {
