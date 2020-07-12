@@ -23,7 +23,7 @@ public class MainActivity extends Activity {
         mWebView.setWebViewClient(new WebViewClient(){});
 
         PowerManager powerManager = (PowerManager) getSystemService(POWER_SERVICE);
-        wakeLock = powerManager.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, "Archillect:wakelock");
+        wakeLock = powerManager.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, "ArchiTV:wakelock");
     }
 
     @Override
@@ -37,6 +37,16 @@ public class MainActivity extends Activity {
         WebSettings webSettings = mWebView.getSettings();
         webSettings.setJavaScriptEnabled(true);
         mWebView.loadUrl(upstreamURL);
+
+        // After 7s press F5 to work around [ENABLE]
+        Runnable runnable = new Runnable() {
+            @Override
+            public void run() {
+                mWebView.reload();
+            }
+        };
+
+        mWebView.postDelayed(runnable,7000);
 
         super.onResume();
     }
