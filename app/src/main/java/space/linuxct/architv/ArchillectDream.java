@@ -1,4 +1,4 @@
-package com.vivi.viviarchillecttv;
+package space.linuxct.architv;
 
 import android.service.dreams.DreamService;
 import android.webkit.WebView;
