@@ -5,7 +5,7 @@ import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
-public class ArchillectDream extends DreamService {
+public class ArchiDream extends DreamService {
     private WebView backgroundView;
     private String upstreamURL = "https://archillect.com/tv";
 

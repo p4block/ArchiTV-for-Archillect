@@ -24,7 +24,7 @@
         android:largeHeap="true"
         android:theme="@style/Theme.Leanback">
         <service
-            android:name=".ArchillectDream"
+            android:name=".ArchiDream"
             android:exported="true"
             android:icon="@mipmap/archillect_icon_512"
             android:label="@string/app_name"
@@ -36,10 +36,10 @@
         </service>
         <activity
             android:name="space.linuxct.architv.MainActivity"
-            android:banner="@drawable/archillect_banner"
-            android:icon="@drawable/archillect_banner"
+            android:banner="@drawable/architv_banner"
+            android:icon="@drawable/architv_banner"
             android:label="@string/app_name"
-            android:logo="@drawable/archillect_banner"
+            android:logo="@drawable/architv_banner"
             android:screenOrientation="landscape"
             android:theme="@style/AppTheme">
             <intent-filter>
@@ -47,7 +47,6 @@
                 <category android:name="android.intent.category.LEANBACK_LAUNCHER" />
             </intent-filter>
         </activity>
-
 
     </application>
 
