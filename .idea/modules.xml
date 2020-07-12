@@ -3,9 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/ArchillectTV-Webview.iml" filepath="$PROJECT_DIR$/.idea/modules/ArchillectTV-Webview.iml" group="ArchillectTV-Webview" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/ArchillectTV-Webview-app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/ArchillectTV-Webview-app.iml" group="ArchillectTV-Webview/app" />
-      <module fileurl="file://$PROJECT_DIR$/TestArchillectTVWebview.iml" filepath="$PROJECT_DIR$/TestArchillectTVWebview.iml" />
-      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/app.iml" group="ArchillectTV-Webview/app" />
     </modules>
   </component>
 </project>

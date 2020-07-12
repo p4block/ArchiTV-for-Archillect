@@ -1,3 +1,6 @@
+ext {
+    defaultApplicationId = 'space.linuxct.architv'
+}
 apply plugin: 'com.android.application'
 
 
@@ -6,11 +9,11 @@ android {
     buildToolsVersion '30.0.1'
 
     defaultConfig {
-        applicationId "space.linuxct.architv"
-        minSdkVersion 28
+        applicationId defaultApplicationId
+        minSdkVersion 25
         targetSdkVersion 30
-        versionCode 5
-        versionName "1.4"
+        versionCode 6
+        versionName '1.5'
     }
     buildTypes {
         release {
