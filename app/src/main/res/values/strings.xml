@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">ArchiTV</string>
+    <string name="title">ArchiTV for Archillect</string>
+    <string name="desc">Sounds of the Internet</string>
 </resources>
